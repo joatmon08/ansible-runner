@@ -29,7 +29,7 @@ passes them to a playbook located at APP_PLAYBOOK_PATH and APP_PLAYBOOK_NAME.
 hosts. You may need to mount the private keys. The example
 below assumes you are using Vagrant hosts.
     ```
-     docker run -d -p 8080:8080 -v ovs-vagrant/ssh-config:/root/.ssh/config -v \    ovs-vagrant/.vagrant/machines:/root/ovs-vagrant/.vagrant/machines ansible-runner:latest
+     docker run -d -p 8080:8080 -v vagrant/ssh-config:/root/.ssh/config -v \    vagrant/.vagrant/machines:/root/vagrant/.vagrant/machines ansible-runner:latest
     ```
-1. You can also use the docker-compose.yaml to create and mount the ansible-runner
-container. It assumes that the Vagrantfile is located at ovs-vagrant.
+1. You can also use the docker-compose.yaml as
+a sample to create and mount the playbooks.
