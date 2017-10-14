@@ -1,0 +1,8 @@
+.idea
+venv/**
+*.iml
+.vagrant
+.DS_Store
+__pycache__
+playbook/*.retry
+.cache
