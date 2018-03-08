@@ -4,5 +4,5 @@ venv/**
 .vagrant
 .DS_Store
 __pycache__
-playbook/*.retry
-.cache
+*.retry
+*cache*

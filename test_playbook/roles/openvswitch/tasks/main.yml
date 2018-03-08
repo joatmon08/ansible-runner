@@ -1,2 +1,5 @@
 ---
 - debug: msg={{ container_network }}
+- fail:
+    msg: "The container network is not_a_network."
+  when: container_network == "not_a_network"
