@@ -1,0 +1,46 @@
+---
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/python:3.7
+  working_directory: /ansible-runner
+  environment:
+    LIBRARY: joatmon08
+    CONTAINER_NAME: ansible-runner
+    VERSION: 1.0
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run integration test
+          command: make integration
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: 
+          name: Build the runner
+          command: |
+            make
+            docker tag $LIBRARY/$CONTAINER_NAME:latest $LIBRARY/$CONTAINER_NAME:$VERSION.$CIRCLE_BUILD_NUM
+      - run:
+          name: Push the image to Docker Hub
+          command: |
+            echo $DOCKER_HUB_KEY | docker login -u $DOCKER_HUB_USER --password-stdin
+            docker push $LIBRARY/$CONTAINER_NAME:$VERSION.$CIRCLE_BUILD_NUM
+
+workflows:
+  version: 2
+  ansible_runner:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test

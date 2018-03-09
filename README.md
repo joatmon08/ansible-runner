@@ -33,3 +33,12 @@ below assumes you are using Vagrant hosts.
     ```
 1. You can also use the docker-compose.yaml as
 a sample to create and mount the playbooks.
+
+## Tests
+There are integration tests that run a test_playbook and checks it
+for specific outputs. To run, use:
+```
+make integration
+```
+This will build a Docker image, spin up a container named ansible-runner, and
+run pytest in it.

@@ -1,14 +1,9 @@
-.PHONY: unit bootstrap
+.PHONY: build
 
-integration: bootstrap
-	sh -c '. venv/bin/activate; APP_PORT=8080 APP_PLAYBOOK_PATH=test_playbook APP_PLAYBOOK_NAME=site.yml python app.py'
+build:
+	docker build -t joatmon08/ansible-runner:latest .
 
-bootstrap: virtualenv
-ifneq ($(wildcard requirements.txt),)
-	venv/bin/pip install -r requirements.txt
-endif
-
-virtualenv:
-	virtualenv -p python3 venv
-	venv/bin/pip install --upgrade pip
-	venv/bin/pip install --upgrade setuptools
+integration: build
+	docker run -d --name ansible-runner joatmon08/ansible-runner:latest
+	docker exec ansible-runner pytest .
+	docker rm -f ansible-runner
