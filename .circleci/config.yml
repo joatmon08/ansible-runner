@@ -18,7 +18,10 @@ jobs:
       - setup_remote_docker
       - run:
           name: Run integration test
-          command: make integration
+          command: |
+            make
+            make integration
+            make clean
 
   build:
     <<: *defaults

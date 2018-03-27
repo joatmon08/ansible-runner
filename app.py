@@ -3,10 +3,8 @@ from flask import Flask, request, jsonify
 import os
 import logging
 
-application_port = int(os.getenv('APP_PORT', 8080))
 app = Flask(__name__)
 try:
-    app.config['APP_PORT'] = application_port
     app.config['APP_PLAYBOOK_PATH'] = os.getenv('APP_PLAYBOOK_PATH', 'playbook')
     app.config['APP_PLAYBOOK_NAME'] = os.getenv('APP_PLAYBOOK_NAME', 'site.yml')
 except Exception as e:
@@ -33,4 +31,4 @@ def play():
     return jsonify({'playbook_return_code': return_code})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv('APP_PORT', 8080)), debug=True)
