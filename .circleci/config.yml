@@ -3,7 +3,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/python:3.7
+    - image: circleci/python:3.6-stretch
   working_directory: /ansible-runner
   environment:
     LIBRARY: joatmon08
