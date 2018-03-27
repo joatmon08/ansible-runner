@@ -38,6 +38,7 @@ jobs:
           command: |
             echo $DOCKER_HUB_KEY | docker login -u $DOCKER_HUB_USER --password-stdin
             docker push $LIBRARY/$CONTAINER_NAME:$VERSION.$CIRCLE_BUILD_NUM
+            docker push $LIBRARY/$CONTAINER_NAME:latest
 
 workflows:
   version: 2
