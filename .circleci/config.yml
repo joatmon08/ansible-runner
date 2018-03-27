@@ -18,7 +18,9 @@ jobs:
       - setup_remote_docker
       - run:
           name: Run integration test
-          command: make integration
+          command: |
+            pip install -r requirements.txt
+            make integration
 
   build:
     <<: *defaults
